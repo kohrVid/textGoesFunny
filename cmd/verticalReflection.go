@@ -1,4 +1,4 @@
-// Copyright © 2016 NAME HERE <EMAIL ADDRESS>
+// Copyright © 2016 Jessica Ete <kohrVid@zoho.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,14 +15,14 @@
 package cmd
 
 import (
-	textGoesFunny "github.com/kohrVid/textGoesFunny/textGoesFunny"
+	textGoesFunny "github.com/kohrVid/textGoesFunny/app"
 	"github.com/spf13/cobra"
 )
 
 // verticalReflectionCmd represents the verticalReflection command
 var verticalReflectionCmd = &cobra.Command{
 	Use:   "verticalReflection",
-	Short: "A brief description of your command",
+	Short: "Display vertically reflected characters",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -30,6 +30,7 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		HelpCommand(cmd, args)
 		verticalReflection := textGoesFunny.VerticalReflection
 		textGoesFunny.HandleString(args[0], verticalReflection)
 	},

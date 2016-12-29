@@ -1,4 +1,4 @@
-// Copyright © 2016 NAME HERE <EMAIL ADDRESS>
+// Copyright © 2016 Jessica Ete <kohrVid@zoho.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"os"
+	"path/filepath"
 )
 
 var cfgFile string
@@ -26,16 +27,18 @@ var cfgFile string
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "textGoesFunny",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Use this app to transform your text!",
+	Long:  `This application is a great way to waste time, rotating and flipping unicode characters for your own amusement!`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	//	Run: func(cmd *cobra.Command, args []string) { },
+}
+
+func HelpCommand(cmd *cobra.Command, args []string) {
+	if len(args) != 1 {
+		fmt.Printf("usage: %s %s [options...] <string>\n", filepath.Base(os.Args[0]), cmd.Use)
+		os.Exit(1)
+	}
 }
 
 // Execute adds all child commands to the root command sets flags appropriately.
@@ -71,7 +74,9 @@ func initConfig() {
 	viper.AutomaticEnv()          // read in environment variables that match
 
 	// If a config file is found, read it in.
-	if err := viper.ReadInConfig(); err == nil {
-		fmt.Println("Using config file:", viper.ConfigFileUsed())
-	}
+	/*
+		if err := viper.ReadInConfig(); err == nil {
+			fmt.Println("Using config file:", viper.ConfigFileUsed())
+		}
+	*/
 }

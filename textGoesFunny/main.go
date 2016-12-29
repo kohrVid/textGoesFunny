@@ -1,4 +1,4 @@
-package main
+package textGoesFunny
 
 import (
 	"fmt"
@@ -8,24 +8,24 @@ import (
 	"strings"
 )
 
-func main() {
-	if len(os.Args) < 2 {
-		helpMessage()
-		os.Exit(1)
-	} else if os.Args[1] == "--help" || os.Args[1] == "-h" {
-		helpPage()
-	} else {
-		options(os.Args[1], os.Args[2])
-	}
-}
+//func main() {
+//if len(os.Args) < 2 {
+//helpMessage()
+//os.Exit(1)
+//} else if os.Args[1] == "--help" || os.Args[1] == "-h" {
+//helpPage()
+//} else {
+//options(os.Args[1], os.Args[2])
+//}
+//}
 
 func helpPage() {
 	helpMessage()
 	fmt.Println("Options:")
-	fmt.Println("-r, --reverse\tDisplay horizontally reflected characters")
+	fmt.Println("-r, --Reverse\tDisplay horizontally reflected characters")
 	fmt.Println("-v, --vertical\tDisplay vertically reflected characters")
-	fmt.Println("-u, --rotate180\tDisplay characters rotated 180°")
-	fmt.Println("    --funny\tDisplay funny characters")
+	fmt.Println("-u, --Rotate180\tDisplay characters Rotated 180°")
+	fmt.Println("    --Funny\tDisplay Funny characters")
 	fmt.Println("    --1337\tDisplay 1337 characters")
 }
 
@@ -36,36 +36,40 @@ func helpMessage() {
 func options(option string, text string) {
 	switch option {
 	case "-r":
-		handleString(text, reverse)
-	case "--reverse":
-		handleString(text, reverse)
+		HandleString(text, Reverse)
+	case "--Reverse":
+		HandleString(text, Reverse)
 	case "-v":
-		handleString(text, verticalReflection)
+		HandleString(text, VerticalReflection)
 	case "--vertical":
-		handleString(text, verticalReflection)
+		HandleString(text, VerticalReflection)
 	case "-u":
-		handleString(text, rotate180)
-	case "--rotate180":
-		handleString(text, rotate180)
+		HandleString(text, Rotate180)
+	case "--Rotate180":
+		HandleString(text, Rotate180)
 	case "--1337":
-		handleString(text, _1337)
-	case "--funny":
-		handleString(text, funny)
+		HandleString(text, _1337)
+	case "--Funny":
+		HandleString(text, Funny)
 	default:
-		fmt.Printf("There is no %s option (\"%s --help\" for help)\n", os.Args[1], filepath.Base(os.Args[0]))
-		log.Fatal("invalid option")
-		os.Exit(1)
+		invalidOption(os.Args[1], os.Args[0])
 	}
 }
 
-func handleString(input string, hash map[string]string) {
+func invalidOption(option string, filename string) {
+	fmt.Printf("There is no %s option (\"%s --help\" for help)\n", option, filepath.Base(filename))
+	log.Fatal("invalid option")
+	os.Exit(1)
+}
+
+func HandleString(input string, hash map[string]string) {
 	var inputWithDelimiter string
 	if hash["th"] != "" {
 		inputWithDelimiter = strings.Replace(strings.Replace(input, "", ",", -1), "t,h", "th", -1)
 	} else {
 		inputWithDelimiter = strings.Replace(input, "", ",", -1)
 	}
-	inputEscape := handleEscapes(inputWithDelimiter)
+	inputEscape := HandleEscapes(inputWithDelimiter)
 	input_array := strings.Split(inputEscape, ",")
 	setEscapeValues(hash)
 	for i := range input_array {
@@ -73,7 +77,7 @@ func handleString(input string, hash map[string]string) {
 	}
 }
 
-func handleEscapes(inputString string) string {
+func HandleEscapes(inputString string) string {
 	replacer := strings.NewReplacer("\\,n,", "\\n,",
 		" ,", "\\s,",
 		"\\,r", "\\r",
@@ -118,7 +122,7 @@ var escapeCharacters = map[string]string{
 	"9":     "9",
 }
 
-var reverse = map[string]string{
+var Reverse = map[string]string{
 	"A": "A",
 	"B": "ᙠ",
 	"C": "Ɔ",
@@ -178,7 +182,7 @@ var reverse = map[string]string{
 	"&": "⅋",
 }
 
-var verticalReflection = map[string]string{
+var VerticalReflection = map[string]string{
 	"A": "ᗄ",
 	"B": "ᗷ",
 	"C": "C",
@@ -240,7 +244,7 @@ var verticalReflection = map[string]string{
 	"&": "⅋",
 }
 
-var rotate180 = map[string]string{
+var Rotate180 = map[string]string{
 	"A": "∀",
 	"B": "𐐒",
 	"C": "Ɔ",
@@ -362,7 +366,7 @@ var _1337 = map[string]string{
 	"&": "&&",
 }
 
-var funny = map[string]string{
+var Funny = map[string]string{
 	"A":  "Å",
 	"B":  "Ƀ",
 	"C":  "Ç",

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -10,10 +11,16 @@ func main() {
 		fmt.Printf(v)
 	}
 
+	generateCharacter("A", funny)
+
 	//funny
 	//_1337
 	//rotate180
 	//verticalReflection
+}
+
+func generateCharacter(charcter string, hash map[string]string) {
+	fmt.Printf(hash[character])
 }
 
 var reverse = map[string]string{
